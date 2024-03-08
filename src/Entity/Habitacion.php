@@ -17,14 +17,14 @@ class Habitacion
     #[ORM\Column]
     private ?int $Precio = null;
 
-    #[ORM\Column]
-    private ?bool $Baño = null;
-
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $Camas = null;
 
     #[ORM\OneToMany(targetEntity: Reserva::class, mappedBy: 'NumeroHabitacion')]
     private Collection $ID_reserva;
+
+    #[ORM\Column]
+    private ?bool $Bano = null;
 
     public function __construct()
     {
@@ -39,18 +39,6 @@ class Habitacion
     public function setPrecio(int $Precio): static
     {
         $this->Precio = $Precio;
-
-        return $this;
-    }
-
-    public function isBaño(): ?bool
-    {
-        return $this->Baño;
-    }
-
-    public function setBaño(bool $Baño): static
-    {
-        $this->Baño = $Baño;
 
         return $this;
     }
@@ -108,4 +96,17 @@ class Habitacion
 
         return $this;
     }
+
+    public function isBano(): ?bool
+    {
+        return $this->Bano;
+    }
+
+    public function setBano(bool $Bano): static
+    {
+        $this->Bano = $Bano;
+
+        return $this;
+    }
+
 }
