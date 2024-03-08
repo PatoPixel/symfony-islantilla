@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ClienteController!{% endblock %}
+
+{% block body %}
+<style>
+    body {
+        background-image: url(https://static-resources-elementor.mirai.com/wp-content/uploads/sites/361/ama-the-resort-header-1.jpg);
+        background-color: #8AB0AB;
+    }
+    .center-nav {
+        background-color: 	rgb(228,223,218, 0.6);
+        margin: 1em auto; 
+        max-width: 950px;
+    }
+    .example-wrapper {
+        background-color: 	rgb(72,120,166, 0.9) ;
+        margin: 1em auto; 
+        max-width: 900px;     
+    }
+
+    .tabla{
+        max-width: 800px;
+        opacity: 0.9;
+    }
+    .fw-bolder {
+        color: #000; /* Cambia este valor al color que desees */
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg w-100 center-nav rounded sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bolder" href="http://127.0.0.1:8000">Indice</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle fw-bolder" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Reservas
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Añadir</a></li>
+            <li><a class="dropdown-item" href="#">Consultar</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle fw-bolder" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Habitaciones
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Añadir</a></li>
+            <li><a class="dropdown-item" href="#">Consultar</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle fw-bolder" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Consultas habituales
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="example-wrapper pt-3 pb-4 rounded">
+
+    <section class="mx-auto text-left tabla">
+            {% if Tabla is defined %}
+			<h1 class="text-center fw-bolder">Tabla Clientes</h1>
+            <br>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>DNI</th>
+						<th>Nombre</th>
+						<th>Edad</th>
+                        <th></th>
+					</tr>
+				</thead>
+				<tbody>
+					
+					{% for cliente in Tabla %}
+						<tr>
+							<td class="w-25">{{ cliente.DNI }}</td>
+							<td class="w-25">{{ cliente.Nombre }}</td>
+                            <td class="w-25">{{ cliente.Edad }}</td>
+                            <td class="w-25" >
+                                <a href="http://127.0.0.1:8000/cliente/actualizar/{{ cliente.DNI }}" class="btn btn-outline-dark ml-2">Actualizar</a>
+                                <a href="http://127.0.0.1:8000/cliente/borrar/{{ cliente.DNI }}" class="btn btn-outline-danger ml-2">Borrar</a>
+                            </td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+            <a href="http://127.0.0.1:8000/cliente/insertar" class="btn btn-dark ml-2 w-100">Añadir</a>
+            {% endif %}
+            </section>
+
+
+			{% if miform is defined %}
+			    <section class="mx-auto text-left tabla pt-2">
+                    <h2 class="fw-bolder">Insercion del Cliente</h2>
+                    <hr>
+			            {{ form_start(miform) }}
+			            {{ form_widget(miform) }}
+			            {{ form_end(miform) }}
+			    </section>
+			{% endif %}
+</div>
+{% endblock %}
