@@ -13,54 +13,54 @@ class Cliente
 {
     #[ORM\Id]
     #[ORM\Column(length: 9)]
-    private ?string $DNI = null;
+    private ?string $dni = null;
 
     #[ORM\Column(length: 40)]
-    private ?string $Nombre = null;
+    private ?string $nombre = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $Edad = null;
+    private ?int $edad = null;
 
-    #[ORM\OneToMany(targetEntity: Reserva::class, mappedBy: 'DNI_huesped')]
-    private Collection $ID_reserva;
+    #[ORM\OneToMany(targetEntity: Reserva::class, mappedBy: 'dni_cliente')]
+    private Collection $reservas;
 
     public function __construct()
     {
-        $this->ID_reserva = new ArrayCollection();
+        $this->reservas = new ArrayCollection();
     }
 
-    public function getDNI(): ?string
+    public function getdni(): ?string
     {
-        return $this->DNI;
+        return $this->dni;
     }
 
-    public function setDNI(string $DNI): static
+    public function setdni(string $dni): static
     {
-        $this->DNI = $DNI;
+        $this->dni = $dni;
 
         return $this;
     }
 
-    public function getNombre(): ?string
+    public function getnombre(): ?string
     {
-        return $this->Nombre;
+        return $this->nombre;
     }
 
-    public function setNombre(string $Nombre): static
+    public function setnombre(string $nombre): static
     {
-        $this->Nombre = $Nombre;
+        $this->nombre = $nombre;
 
         return $this;
     }
 
-    public function getEdad(): ?int
+    public function getedad(): ?int
     {
-        return $this->Edad;
+        return $this->edad;
     }
 
-    public function setEdad(int $Edad): static
+    public function setedad(int $edad): static
     {
-        $this->Edad = $Edad;
+        $this->edad = $edad;
 
         return $this;
     }
@@ -68,27 +68,27 @@ class Cliente
     /**
      * @return Collection<int, Reserva>
      */
-    public function getIDReserva(): Collection
+    public function getReservas(): Collection
     {
-        return $this->ID_reserva;
+        return $this->reservas;
     }
 
-    public function addIDReserva(Reserva $iDReserva): static
+    public function addReserva(Reserva $reserva): static
     {
-        if (!$this->ID_reserva->contains($iDReserva)) {
-            $this->ID_reserva->add($iDReserva);
-            $iDReserva->setDNIHuesped($this);
+        if (!$this->reservas->contains($reserva)) {
+            $this->reservas->add($reserva);
+            $reserva->setDniCliente($this);
         }
 
         return $this;
     }
 
-    public function removeIDReserva(Reserva $iDReserva): static
+    public function removeReserva(Reserva $reserva): static
     {
-        if ($this->ID_reserva->removeElement($iDReserva)) {
+        if ($this->reservas->removeElement($reserva)) {
             // set the owning side to null (unless already changed)
-            if ($iDReserva->getDNIHuesped() === $this) {
-                $iDReserva->setDNIHuesped(null);
+            if ($reserva->getDniCliente() === $this) {
+                $reserva->setDniCliente(null);
             }
         }
 

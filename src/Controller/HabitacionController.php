@@ -64,7 +64,7 @@ class HabitacionController extends AbstractController
      #[Route('/actualizar/{Numero}', name: 'actualizar')]
     public function actualizar($Numero, EntityManagerInterface $GE, Request $request):Response{
 
-        $DatosHabitacion =  $GE->getRepository(Habitacion::class)->findOneBy(['Numero' => $Numero]);
+        $DatosHabitacion =  $GE->getRepository(Habitacion::class)->findOneBy(['numero' => $Numero]);
 
         $habitacion = new Habitacion();
         $habitacion->setNumero($Numero);
@@ -93,7 +93,7 @@ class HabitacionController extends AbstractController
 
     #[Route('/borrar/{Numero}', name: 'borrar')]
     public function borrar($Numero, EntityManagerInterface $GE):Response{
-        $DatosHabitacion =  $GE->getRepository(Habitacion::class)->findOneBy(['Numero' => $Numero]);
+        $DatosHabitacion =  $GE->getRepository(Habitacion::class)->findOneBy(['numero' => $Numero]);
         $GE->remove($DatosHabitacion);
         $GE->flush();
         return $this->redirectToRoute('habitacion_mostrar');

@@ -13,56 +13,67 @@ class Habitacion
 {
     #[ORM\Id]
     #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $Numero = null;
+    private ?int $numero = null;
     #[ORM\Column]
-    private ?int $Precio = null;
+    private ?int $precio = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $Camas = null;
-
-    #[ORM\OneToMany(targetEntity: Reserva::class, mappedBy: 'NumeroHabitacion')]
-    private Collection $ID_reserva;
+    private ?int $camas = null;
 
     #[ORM\Column]
-    private ?bool $Bano = null;
+    private ?bool $bano = null;
+
+    #[ORM\OneToMany(targetEntity: Reserva::class, mappedBy: 'numero_habitacion')]
+    private Collection $reservas;
 
     public function __construct()
     {
-        $this->ID_reserva = new ArrayCollection();
+        $this->reservas = new ArrayCollection();
+    }
+    public function getprecio(): ?int
+    {
+        return $this->precio;
     }
 
-    public function getPrecio(): ?int
+    public function setprecio(int $precio): static
     {
-        return $this->Precio;
-    }
-
-    public function setPrecio(int $Precio): static
-    {
-        $this->Precio = $Precio;
+        $this->precio = $precio;
 
         return $this;
     }
 
-    public function getCamas(): ?int
+    public function getcamas(): ?int
     {
-        return $this->Camas;
+        return $this->camas;
     }
 
-    public function setCamas(int $Camas): static
+    public function setcamas(int $camas): static
     {
-        $this->Camas = $Camas;
+        $this->camas = $camas;
 
         return $this;
     }
 
-    public function getNumero(): ?int
+    public function getnumero(): ?int
     {
-        return $this->Numero;
+        return $this->numero;
     }
 
-    public function setNumero(int $Numero): static
+    public function setnumero(int $numero): static
     {
-        $this->Numero = $Numero;
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    public function isbano(): ?bool
+    {
+        return $this->bano;
+    }
+
+    public function setbano(bool $bano): static
+    {
+        $this->bano = $bano;
 
         return $this;
     }
@@ -70,41 +81,29 @@ class Habitacion
     /**
      * @return Collection<int, Reserva>
      */
-    public function getIDReserva(): Collection
+    public function getReservas(): Collection
     {
-        return $this->ID_reserva;
+        return $this->reservas;
     }
 
-    public function addIDReserva(Reserva $iDReserva): static
+    public function addReserva(Reserva $reserva): static
     {
-        if (!$this->ID_reserva->contains($iDReserva)) {
-            $this->ID_reserva->add($iDReserva);
-            $iDReserva->setNumeroHabitacion($this);
+        if (!$this->reservas->contains($reserva)) {
+            $this->reservas->add($reserva);
+            $reserva->setNumeroHabitacion($this);
         }
 
         return $this;
     }
 
-    public function removeIDReserva(Reserva $iDReserva): static
+    public function removeReserva(Reserva $reserva): static
     {
-        if ($this->ID_reserva->removeElement($iDReserva)) {
+        if ($this->reservas->removeElement($reserva)) {
             // set the owning side to null (unless already changed)
-            if ($iDReserva->getNumeroHabitacion() === $this) {
-                $iDReserva->setNumeroHabitacion(null);
+            if ($reserva->getNumeroHabitacion() === $this) {
+                $reserva->setNumeroHabitacion(null);
             }
         }
-
-        return $this;
-    }
-
-    public function isBano(): ?bool
-    {
-        return $this->Bano;
-    }
-
-    public function setBano(bool $Bano): static
-    {
-        $this->Bano = $Bano;
 
         return $this;
     }

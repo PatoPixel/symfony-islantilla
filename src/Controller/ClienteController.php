@@ -65,7 +65,7 @@ class ClienteController extends AbstractController
     #[Route('/actualizar/{DNI}', name: 'actualizar')]
     public function actualizar($DNI, EntityManagerInterface $GE, Request $request):Response{
 
-        $DatosCliente =  $GE->getRepository(Cliente::class)->findOneBy(['DNI' => $DNI]);
+        $DatosCliente =  $GE->getRepository(Cliente::class)->findOneBy(['dni' => $DNI]);
 
         $cliente = new Cliente();
         $cliente->setDNI($DNI);
@@ -79,7 +79,7 @@ class ClienteController extends AbstractController
         {
             $datosFormulario = $formulario->getData();
             $DatosCliente->setNombre($datosFormulario->getNombre());
-            $DatosCliente->setEdad($datosFormulario->getEdad());
+            $DatosCliente->setEdad($datosFormulario->getedad());
             $GE->flush();
             return $this->redirectToRoute('cliente_mostrar');
 
@@ -93,7 +93,7 @@ class ClienteController extends AbstractController
 
     #[Route('/borrar/{DNI}', name: 'borrar')]
     public function borrar($DNI, EntityManagerInterface $GE):Response{
-        $DatosCliente =  $GE->getRepository(Cliente::class)->findOneBy(['DNI' => $DNI]);
+        $DatosCliente =  $GE->getRepository(Cliente::class)->findOneBy(['dni' => $DNI]);
         $GE->remove($DatosCliente);
         $GE->flush();
         return $this->redirectToRoute('cliente_mostrar');

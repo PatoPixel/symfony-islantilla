@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Habitacion;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,7 +30,7 @@ class HabitacionType extends AbstractType
                 'attr' =>['placeholder' => 'Precio por noche'],
                 'label_attr' => ['class' => 'fw-bolder']
             ])
-            ->add('Bano')
+            ->add('bano')
             ->add('Camas', IntegerType::class, [
                 'constraints' => [
                     new Range(['min' => 1, 'max' => 6])
@@ -38,7 +39,7 @@ class HabitacionType extends AbstractType
                 'label_attr' => ['class' => 'fw-bolder']
             ])
             ->add('guardar', SubmitType::class,
-                ["label"=> "Insertar Habitación", 'attr' => ['class' => 'btn btn-success']]);
+                ["label"=> "Insertar Habitación", 'attr' => ['class' => 'btn btn-success']])
             
         ;
     }

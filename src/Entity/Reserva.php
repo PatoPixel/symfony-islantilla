@@ -15,24 +15,21 @@ class Reserva
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $FechaReserva = null;
+    private ?\DateTimeInterface $fecha_reserva = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $FechaEntrada = null;
+    private ?\DateTimeInterface $fecha_llegada = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $FechaSalida = null;
+    private ?\DateTimeInterface $fecha_salida = null;
 
-    #[ORM\Column]
-    private ?bool $Pagado = null;
+    #[ORM\ManyToOne(inversedBy: 'reservas')]
+    #[ORM\JoinColumn(name:"dni_cliente", referencedColumnName:"dni", nullable: false)]
+    private ?Cliente $dni_cliente = null;
 
-    #[ORM\ManyToOne(inversedBy: 'ID_reserva')]
-    #[ORM\JoinColumn(nullable: false, name:"DNI_huesped", referencedColumnName:"DNI")]
-    private ?Cliente $DNI_huesped = null;
-
-    #[ORM\ManyToOne(inversedBy: 'ID_reserva')]
-    #[ORM\JoinColumn(nullable: false, name:"NumeroHabitacion", referencedColumnName:"Numero")]
-    private ?Habitacion $NumeroHabitacion = null;
+    #[ORM\ManyToOne(inversedBy: 'reservas')]
+    #[ORM\JoinColumn(name:"numero_habitacion", referencedColumnName:"numero", nullable: false)]
+    private ?Habitacion $numero_habitacion = null;
 
     public function getId(): ?int
     {
@@ -41,72 +38,60 @@ class Reserva
 
     public function getFechaReserva(): ?\DateTimeInterface
     {
-        return $this->FechaReserva;
+        return $this->fecha_reserva;
     }
 
-    public function setFechaReserva(\DateTimeInterface $FechaReserva): static
+    public function setFechaReserva(\DateTimeInterface $fecha_reserva): static
     {
-        $this->FechaReserva = $FechaReserva;
+        $this->fecha_reserva = $fecha_reserva;
 
         return $this;
     }
 
-    public function getFechaEntrada(): ?\DateTimeInterface
+    public function getFechaLlegada(): ?\DateTimeInterface
     {
-        return $this->FechaEntrada;
+        return $this->fecha_llegada;
     }
 
-    public function setFechaEntrada(\DateTimeInterface $FechaEntrada): static
+    public function setFechaLlegada(\DateTimeInterface $fecha_llegada): static
     {
-        $this->FechaEntrada = $FechaEntrada;
+        $this->fecha_llegada = $fecha_llegada;
 
         return $this;
     }
 
     public function getFechaSalida(): ?\DateTimeInterface
     {
-        return $this->FechaSalida;
+        return $this->fecha_salida;
     }
 
-    public function setFechaSalida(\DateTimeInterface $FechaSalida): static
+    public function setFechaSalida(\DateTimeInterface $fecha_salida): static
     {
-        $this->FechaSalida = $FechaSalida;
+        $this->fecha_salida = $fecha_salida;
 
         return $this;
     }
 
-    public function isPagado(): ?bool
+    public function getDniCliente(): ?Cliente
     {
-        return $this->Pagado;
+        return $this->dni_cliente;
     }
 
-    public function setPagado(bool $Pagado): static
+    public function setDniCliente(?Cliente $dni_cliente): static
     {
-        $this->Pagado = $Pagado;
-
-        return $this;
-    }
-
-    public function getDNIHuesped(): ?Cliente
-    {
-        return $this->DNI_huesped;
-    }
-
-    public function setDNIHuesped(?Cliente $DNI_huesped): static
-    {
-        $this->DNI_huesped = $DNI_huesped;
+        $this->dni_cliente = $dni_cliente;
 
         return $this;
     }
 
     public function getNumeroHabitacion(): ?Habitacion
     {
-        return $this->NumeroHabitacion;
+        return $this->numero_habitacion;
     }
 
-    public function setNumeroHabitacion(?Habitacion $NumeroHabitacion): static
+    public function setNumeroHabitacion(?Habitacion $numero_habitacion): static
     {
-        $this->NumeroHabitacion = $NumeroHabitacion;
+        $this->numero_habitacion = $numero_habitacion;
 
         return $this;
     }

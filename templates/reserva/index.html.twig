@@ -38,20 +38,20 @@
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle fw-bolder" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Reservas
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="http://127.0.0.1:8000/reserva/insertar">Añadir</a></li>
-            <li><a class="dropdown-item" href="http://127.0.0.1:8000/reserva/mostrar">Consultar</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle fw-bolder" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Clientes
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="http://127.0.0.1:8000/cliente/insertar">Añadir</a></li>
             <li><a class="dropdown-item" href="http://127.0.0.1:8000/cliente/mostrar">Consultar</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle fw-bolder" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Habitaciones
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="http://127.0.0.1:8000/habitacion/insertar">Añadir</a></li>
+            <li><a class="dropdown-item" href="http://127.0.0.1:8000/habitacion/mostrar">Consultar</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -72,15 +72,16 @@
 
     <section class="mx-auto text-left tabla">
             {% if Tabla is defined %}
-			<h1 class="text-center fw-bolder">Tabla Habitaciones</h1>
+			<h1 class="text-center fw-bolder">Tabla de Reservas</h1>
             <br>
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>Numero</th>
-						<th>Camas</th>
-						<th>Baño</th>
-                        <th>Precio</th>
+						<th>Habitacion</th>
+						<th>DNI Cliente</th>
+						<th>Reserva</th>
+                        <th>Llegada</th>
+                        <th>Saldia</th>
                         <th></th>
 					</tr>
 				</thead>
@@ -88,31 +89,29 @@
 					
 					{% for habitacion in Tabla %}
 						<tr>
-                        {% set bano = "No Tiene Baño" %}
-                            {% if habitacion.Bano %}
-                                {% set bano = "Tiene Baño" %}
-                            {% endif %}
+                            
 							<td class="w-auto">{{ habitacion.Numero }}</td>
-                            <td class="w-auto">{{ habitacion.Camas }}</td>
-                            <td class="w-auto">{{ bano }}</td>
-                            <td class="w-auto">{{ habitacion.Precio }}</td>
+                            <td class="w-auto">{{ habitacion.Cliente }}</td>
+                            <td class="w-auto">{{ habitacion.FechaReserva|date('d/m/Y') }}</td>
+                            <td class="w-auto">{{ habitacion.FechaLlegada|date('d/m/Y') }}</td>
+                            <td class="w-auto">{{ habitacion.FechaSalida|date('d/m/Y') }}</td>
                             <td class="w-25" >
-                                <a href="http://127.0.0.1:8000/habitacion/actualizar/{{ habitacion.Numero }}" class="btn btn-outline-dark ml-2">Actualizar</a>
-                                <a href="http://127.0.0.1:8000/habitacion/borrar/{{ habitacion.Numero }}" class="btn btn-outline-danger ml-2">Borrar</a>
+                                <a href="http://127.0.0.1:8000/reserva/actualizar/{{ habitacion.ID }}" class="btn btn-outline-dark ml-2">Actualizar</a>
+                                <a href="http://127.0.0.1:8000/reserva/borrar/{{ habitacion.ID }}" class="btn btn-outline-danger ml-2">Borrar</a>
                             </td>
 						</tr>
 					{% endfor %}
 				</tbody>
 			</table>
-            <a href="http://127.0.0.1:8000/habitacion/insertar" class="btn btn-dark ml-2 w-100">Añadir</a>
+            <a href="http://127.0.0.1:8000/reserva/insertar" class="btn btn-dark ml-2 w-100">Añadir</a>
             {% endif %}
             </section>
 
 
 			{% if miform is defined %}
 			    <section class="mx-auto text-left tabla pt-2">
-                    <h2 class="fw-bolder">Insercion de la Habitacion
-                    <a href="http://127.0.0.1:8000/habitacion/mostrar" class="btn btn-dark">Ver habitaciones</a>
+                    <h2 class="fw-bolder">Insercion de nueva Reserva
+                    <a href="http://127.0.0.1:8000/reserva/mostrar" class="btn btn-dark">Ver reservas</a>
                     </h2>
                     
                     <hr>
