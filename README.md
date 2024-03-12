@@ -6,7 +6,9 @@ http://127.0.0.1:8000                                      INDICE
 Cliente:
 
 http://127.0.0.1:8000/cliente/mostrar                      Mostrar cliente
+
 http://127.0.0.1:8000/cliente/insertar                     Insertar Cliente
+
 http://127.0.0.1:8000/cliente/actualizar/01234567B         Actualizar Cliente (cambiar el final por DNI)
 
 Reservas:
