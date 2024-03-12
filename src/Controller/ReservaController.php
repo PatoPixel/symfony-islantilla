@@ -38,6 +38,7 @@ class ReservaController extends AbstractController
 
         }else{
             return $this->render('reserva/index.html.twig', [
+            'controller_name' => 'Inserción de nueva reserva',
             'miform' => $formulario
         ]);
         }
@@ -107,6 +108,7 @@ class ReservaController extends AbstractController
     
         }else{
             return $this->render('reserva/index.html.twig', [
+            'controller_name' => 'Actualización de reseva',
             'miform' => $formulario
         ]);
         }     

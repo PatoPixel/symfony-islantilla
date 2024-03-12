@@ -45,4 +45,44 @@ class ReservaRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function ConsultaEdad(): array {
+        return $this->createQueryBuilder("r")
+        ->innerJoin("r.dni_cliente", "c") 
+        ->innerJoin("r.numero_habitacion", "h")
+        ->select("c.nombre", "c.edad", "h.camas", "h.precio", "r.fecha_reserva","r.fecha_llegada", "r.fecha_salida")
+        ->orderBy("c.edad", "ASC")
+        ->getQuery()
+        ->getResult();
+      }
+    public function ConsultaTempVerano($año): array
+    {
+      $fechaInicio = new \DateTime($año . "-06-15");
+      $fechaFin = new \DateTime($año . "-09-15");
+
+    return $this->createQueryBuilder("r")
+      ->innerJoin("r.dni_cliente", "c")
+      ->innerJoin("r.numero_habitacion", "h")
+      ->select("c.nombre", "c.edad", "h.camas", "h.precio", "r.fecha_reserva", "r.fecha_llegada", "r.fecha_salida")
+      ->where("r.fecha_llegada >= :fechaInicio")
+      ->andWhere("r.fecha_llegada <= :fechaFin")
+      ->orderBy("c.edad", "ASC")
+      ->setParameter("fechaInicio", $fechaInicio)
+      ->setParameter("fechaFin", $fechaFin)
+      ->getQuery()
+      ->getResult();
+    }
+
+    public function ConsultaXDias($dias): array
+    {
+    return $this->createQueryBuilder("r")
+      ->innerJoin("r.dni_cliente", "c")
+      ->innerJoin("r.numero_habitacion", "h")
+      ->select("c.nombre", "c.edad", "h.camas", "h.precio", "r.fecha_reserva", "r.fecha_llegada", "r.fecha_salida")
+      ->where("r.fecha_salida - r.fecha_llegada >= :dias")
+      ->orderBy("r.fecha_llegada")
+      ->setParameter("dias", $dias)
+      ->getQuery()
+      ->getResult();
+    }    
 }

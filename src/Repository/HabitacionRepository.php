@@ -45,4 +45,12 @@ class HabitacionRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function ConsultaBaño(): array
+{
+  return $this->createQueryBuilder("h")
+    ->select("h.bano","h.numero","h.camas", "h.precio")
+    ->orderBy("h.bano", "DESC")
+    ->getQuery()
+    ->getResult();
+}
 }

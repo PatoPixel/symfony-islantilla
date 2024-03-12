@@ -33,7 +33,7 @@ class ClienteController extends AbstractController
 
         }else{
             return $this->render('cliente/index.html.twig', [
-            'controller_name' => 'ClienteController',
+            'controller_name' => 'Inserción Cliente',
             'miform' => $formulario
         ]);
         }
@@ -85,7 +85,7 @@ class ClienteController extends AbstractController
 
         }else{
             return $this->render('cliente/index.html.twig', [
-            'controller_name' => 'ClienteController',
+            'controller_name' => 'Actualizar Cliente',
             'miform' => $formulario
         ]);
         }     

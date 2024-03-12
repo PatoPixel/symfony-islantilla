@@ -32,6 +32,7 @@ class HabitacionController extends AbstractController
 
         }else{
             return $this->render('habitacion/index.html.twig', [
+            'controller_name' => 'Inserción de habitación',
             'miform' => $formulario
         ]);
         }
@@ -41,8 +42,6 @@ class HabitacionController extends AbstractController
    #[Route('/mostrar', name: 'mostrar')]
     public function mostrar(HabitacionRepository $AR): Response
     {
-        // endpoint de ejemplo: http://127.0.0.1:8000/cliente/mostrar
-        // Desde el gestor de entidades, saco el repositorio de mi clase
         $habitaciones =  $AR->findAll();
  
         $json = array();
@@ -86,6 +85,7 @@ class HabitacionController extends AbstractController
 
         }else{
             return $this->render('habitacion/index.html.twig', [
+            'controller_name' => 'Actualización de habitación',
             'miform' => $formulario
         ]);
         }     

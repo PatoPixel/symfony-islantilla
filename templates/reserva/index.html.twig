@@ -41,8 +41,8 @@
             Clientes
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="http://127.0.0.1:8000/cliente/insertar">Añadir</a></li>
-            <li><a class="dropdown-item" href="http://127.0.0.1:8000/cliente/mostrar">Consultar</a></li>
+            <li><a class="dropdown-item" href="http://127.0.0.1:8000/cliente/insertar">Añadir <i class="fa-solid fa-plus"></i></a></li>
+            <li><a class="dropdown-item" href="http://127.0.0.1:8000/cliente/mostrar">Consultar <i class="fa-solid fa-eye"></i></a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -50,8 +50,8 @@
             Habitaciones
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="http://127.0.0.1:8000/habitacion/insertar">Añadir</a></li>
-            <li><a class="dropdown-item" href="http://127.0.0.1:8000/habitacion/mostrar">Consultar</a></li>
+            <li><a class="dropdown-item" href="http://127.0.0.1:8000/habitacion/insertar">Añadir <i class="fa-solid fa-plus"></i></a></li>
+            <li><a class="dropdown-item" href="http://127.0.0.1:8000/habitacion/mostrar">Consultar <i class="fa-solid fa-eye"></i></a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -59,9 +59,10 @@
             Consultas habituales
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="http://127.0.0.1:8000/consultas/edad">Por edad <i class="fa-solid fa-user"></i></a></li>
+            <li><a class="dropdown-item" href="http://127.0.0.1:8000/consultas/verano">Temporada de verano <i class="fa-solid fa-sun"></i></a></li>
+            <li><a class="dropdown-item" href="http://127.0.0.1:8000/consultas/baño">Tiene baño <i class="fa-solid fa-toilet"></i></a></li>
+            <li><a class="dropdown-item" href="http://127.0.0.1:8000/consultas/dias">Reserva mayor a X dias <i class="fa-solid fa-calendar-days"></i></a></li>
           </ul>
         </li>
       </ul>
@@ -81,7 +82,7 @@
 						<th>DNI Cliente</th>
 						<th>Reserva</th>
                         <th>Llegada</th>
-                        <th>Saldia</th>
+                        <th>Salida</th>
                         <th></th>
 					</tr>
 				</thead>
@@ -110,7 +111,7 @@
 
 			{% if miform is defined %}
 			    <section class="mx-auto text-left tabla pt-2">
-                    <h2 class="fw-bolder">Insercion de nueva Reserva
+                    <h2 class="fw-bolder">{{controller_name}}
                     <a href="http://127.0.0.1:8000/reserva/mostrar" class="btn btn-dark">Ver reservas</a>
                     </h2>
                     

@@ -1,0 +1,282 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+    body {
+        background-image: url(https://static-resources-elementor.mirai.com/wp-content/uploads/sites/361/ama-the-resort-header-1.jpg);
+        background-color: #8AB0AB;
+    }
+    .center-nav {
+        background-color: 	rgb(228,223,218, 0.6);
+        margin: 1em auto; 
+        max-width: 950px;
+    }
+    .example-wrapper {
+        background-color: 	rgb(72,120,166, 0.9) ;
+        margin: 1em auto; 
+        max-width: 900px;     
+    }
+
+    .tabla{
+        max-width: 800px;
+        opacity: 0.9;
+    }
+    .fw-bolder {
+        color: #000; /* Cambia este valor al color que desees */
+    }
+    .ancho{
+      font-weight: bold
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg w-100 center-nav rounded sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bolder" href="http://127.0.0.1:8000">Indice</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle fw-bolder" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Reservas
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="http://127.0.0.1:8000/reserva/insertar">Añadir <i class="fa-solid fa-plus"></i></a></li>
+            <li><a class="dropdown-item" href="http://127.0.0.1:8000/reserva/mostrar">Consultar <i class="fa-solid fa-eye"></i></a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle fw-bolder" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Clientes
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="http://127.0.0.1:8000/cliente/insertar">Añadir <i class="fa-solid fa-plus"></i></a></li>
+            <li><a class="dropdown-item" href="http://127.0.0.1:8000/cliente/mostrar">Consultar <i class="fa-solid fa-eye"></i></a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle fw-bolder" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Habitaciones
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="http://127.0.0.1:8000/habitacion/insertar">Añadir <i class="fa-solid fa-plus"></i></a></li>
+            <li><a class="dropdown-item" href="http://127.0.0.1:8000/habitacion/mostrar">Consultar <i class="fa-solid fa-eye"></i></a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="example-wrapper pt-3 pb-4 rounded">
+
+    <section class="mx-auto text-left tabla">
+
+    <!-- -------------------------------------------------------------------------------- 
+
+
+                        /* CONSULTA POR EDAD */
+
+
+         --------------------------------------------------------------------------------  -->
+
+            {% if Consulta_Edad is defined %}
+			<h1 class="text-center fw-bolder">{{nombre_tabla}}</h1>
+            <br>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Edad</th>
+						<th>Nº de camas</th>
+            <th>Precio</th>
+            <th>Fecha de la reserva</th>
+            <th>Fecha de entrada</th>
+            <th>Fecha de salida</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+					{% for consulta in Consulta_Edad %}
+						<tr>
+							<td class="w-auto">{{ consulta.Nombre }}</td>
+              <td class="w-auto">{{ consulta.Edad }}</td>
+              <td class="w-auto">{{ consulta.Camas }}</td>
+              <td class="w-auto">{{ consulta.Precio }}</td>
+              <td class="w-auto">{{ consulta.FechaReserva|date('d/m/Y') }}</td>
+              <td class="w-auto">{{ consulta.FechaLlegada|date('d/m/Y') }}</td>
+              <td class="w-auto">{{ consulta.FechaSalida|date('d/m/Y') }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+      <a href="http://127.0.0.1:8000/consultas/verano" class="btn btn-outline-warning ancho">Reservas en Temporada de verano</a>
+      <a href="http://127.0.0.1:8000/consultas/baño" class="btn btn-outline-warning ancho">Tiene baño</a>
+      <a href="http://127.0.0.1:8000/consultas/dias" class="btn btn-outline-warning ancho">Reservar mayores a X dias</a>
+            {% endif %}
+
+    <!-- -------------------------------------------------------------------------------- 
+
+
+                        /* CONSULTA TEMPORADA VERANO */
+
+
+         --------------------------------------------------------------------------------  -->
+         
+            {% if Consulta_Verano is defined %}
+			<h1 class="text-center fw-bolder">{{nombre_tabla}}</h1>
+            <a href="http://127.0.0.1:8000/consultas/verano" class="btn btn-primary">Nueva busqueda</a>
+            <br>
+            <br>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Edad</th>
+						<th>Nº de camas</th>
+            <th>Precio</th>
+            <th>Fecha de entrada</th>
+            <th>Fecha de salida</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+					{% for consulta in Consulta_Verano %}
+						<tr>
+							<td class="w-auto">{{ consulta.Nombre }}</td>
+              <td class="w-auto">{{ consulta.Edad }}</td>
+              <td class="w-auto">{{ consulta.Camas }}</td>
+              <td class="w-auto">{{ consulta.Precio }}</td>
+              <td class="w-auto">{{ consulta.FechaLlegada|date('d/m/Y') }}</td>
+              <td class="w-auto">{{ consulta.FechaSalida|date('d/m/Y') }}</td>              
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+      <a href="http://127.0.0.1:8000/consultas/edad" class="btn btn-outline-warning ancho">Por edad</a>
+      <a href="http://127.0.0.1:8000/consultas/baño" class="btn btn-outline-warning ancho">Hay baño</a>
+      <a href="http://127.0.0.1:8000/consultas/dias" class="btn btn-outline-warning ancho">Reservar mayores a X dias</a>
+            {% endif %}
+      {% if form is defined %}  
+      <section>
+        <h2 class="fw-bolder">Seleccione del año para las reservas de la temporada de verano (Junio-15 hasta Septiembre-15)</h2>
+			            {{ form_start(form) }}
+			            {{ form_widget(form) }}
+			            {{ form_end(form) }}
+      <a href="http://127.0.0.1:8000/consultas/edad" class="btn btn-outline-warning ancho">Por edad</a>
+      <a href="http://127.0.0.1:8000/consultas/baño" class="btn btn-outline-warning ancho">Hay baño</a>
+      <a href="http://127.0.0.1:8000/consultas/dias" class="btn btn-outline-warning ancho">Reservar mayores a X dias</a>
+      </section>       
+			{% endif %}
+    <!-- -------------------------------------------------------------------------------- 
+
+
+                        /* CONSULTA SI HAY BAÑO O NO */
+
+
+         --------------------------------------------------------------------------------  -->
+
+
+
+            {% if Consulta_Baño is defined %}
+			<h1 class="text-center fw-bolder">{{nombre_tabla}}</h1>
+      <a href="{{ path('consultas_mostrarJSONBaño') }}" class="btn btn-danger">Mostrar JSON</a>
+            <br><br>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Baño</th>
+						<th>Numero</th>
+						<th>Nº de camas</th>
+            <th>Precio</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+					{% for consulta in Consulta_Baño %}
+          {% set bano = "No Tiene Baño" %}
+                {% if consulta.Bano %}
+                  {% set bano = "Tiene Baño" %}
+                {% endif %}
+						<tr>
+							<td class="w-auto">{{ bano }}</td>
+              <td class="w-auto">{{ consulta.Numero }}</td>
+              <td class="w-auto">{{ consulta.Camas }}</td>
+              <td class="w-auto">{{ consulta.Precio }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+      <a href="http://127.0.0.1:8000/consultas/edad" class="btn btn-outline-warning ancho">Por edad</a>
+      <a href="http://127.0.0.1:8000/consultas/verano" class="btn btn-outline-warning ancho">Reservas en Temporada de verano</a>
+      <a href="http://127.0.0.1:8000/consultas/dias" class="btn btn-outline-warning ancho">Reservas mayores a X dias</a>
+            {% endif %}
+    <!-- -------------------------------------------------------------------------------- 
+
+
+                        /* CONSULTA DIAS */
+
+
+         --------------------------------------------------------------------------------  -->
+
+
+{% if Consulta_Dias is defined %}
+			<h1 class="text-center fw-bolder">
+                {{nombre_tabla}}
+                
+      </h1>
+      <a href="{{ path('consultas_mostrarJSON', {'dias': dias}) }}" class="btn btn-danger">Mostrar JSON</a>
+      {% if formJson is defined %}
+                {{ form_start(formJson) }}
+			          {{ form_widget(formJson) }}
+			          {{ form_end(formJson) }}
+      {% endif %}
+            
+            <a href="http://127.0.0.1:8000/consultas/dias" class="btn btn-primary">Nueva busqueda</a>
+            <br>
+            <br>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Edad</th>
+						<th>Nº de camas</th>
+            <th>Precio</th>
+            <th>Fecha de entrada</th>
+            <th>Fecha de salida</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+					{% for consulta in Consulta_Dias %}
+						<tr>
+							<td class="w-auto">{{ consulta.Nombre }}</td>
+              <td class="w-auto">{{ consulta.Edad }}</td>
+              <td class="w-auto">{{ consulta.Camas }}</td>
+              <td class="w-auto">{{ consulta.Precio }}</td>
+              <td class="w-auto">{{ consulta.FechaLlegada|date('d/m/Y') }}</td>
+              <td class="w-auto">{{ consulta.FechaSalida|date('d/m/Y') }}</td>             
+
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+      <a href="http://127.0.0.1:8000/consultas/edad" class="btn btn-outline-warning ancho">Por edad</a>
+      <a href="http://127.0.0.1:8000/consultas/verano" class="btn btn-outline-warning ancho">Reservas en Temporada de verano</a>
+      <a href="http://127.0.0.1:8000/consultas/baño" class="btn btn-outline-warning ancho">Tiene baño</a>
+            {% endif %}
+      {% if form2 is defined %}  
+      <section>
+        <h2 class="fw-bolder">Reservas de mas de X dias</h2>
+			            {{ form_start(form2) }}
+			            {{ form_widget(form2) }}
+			            {{ form_end(form2) }}
+      <a href="http://127.0.0.1:8000/consultas/edad" class="btn btn-outline-warning ancho">Por edad</a>
+      <a href="http://127.0.0.1:8000/consultas/verano" class="btn btn-outline-warning ancho">Reservas en Temporada de verano</a>
+      <a href="http://127.0.0.1:8000/consultas/baño" class="btn btn-outline-warning ancho">Tiene baño</a>
+      </section>       
+			{% endif %}
+    </section>
+</div>
+{% endblock %}
+
